@@ -18,16 +18,33 @@ const APP = {
         }
         return response.json();
       })
-      .then((data) => {
-        let states = data.filter(
+      .then((filter) => {
+        let states = filter.filter(
           (state) =>
             state.address.state === "Texas" ||
             state.address.state === "Alaska" ||
             state.address.state === "California"
         );
-        console.log(states);
 
-        APP.buildHTML(states);
+        console.log(states);
+        return states;
+      })
+      .then((map) => {
+        let mapObj = map.map((obj) => {
+          return {
+            uid: obj.uid,
+            full_name: `${obj.first_name} ${obj.last_name}`,
+            email: obj.email,
+            dob: obj.date_of_birth,
+            state: obj.address.state,
+            city: obj.address.city,
+            lat: obj.address.coordinates.lat,
+            lng: obj.address.coordinates.lng,
+          };
+        });
+
+        console.log(mapObj);
+        APP.buildHTML(mapObj);
       })
       .catch((err) => {
         APP.errorHandler(err);
@@ -43,14 +60,15 @@ const APP = {
       div.classList.add("card");
 
       div.innerHTML = `
-      <h1 class="card__title"> ${data.first_name} ${data.last_name} </h1>
+      <h1 class="card__title"> ${data.full_name} </h1>
       <div class="card__content">
       <p class="card__text"> Uid: ${data.uid}</p>
-      <p class="card__text"> D.o.B: ${data.date_of_birth}</p>
-      <p class="card__text"> City: ${data.address.city}</p>
-      <p class="card__text"> State: ${data.address.state}</p>
-      <p class="card__text"> Latitude: ${data.address.coordinates.lat}</p>
-      <p class="card__text"> Longitude: ${data.address.coordinates.lng}</p>
+      <p class="card__text"> Email: ${data.email}</p>
+      <p class="card__text"> D.o.B: ${data.dob}</p>
+      <p class="card__text"> City: ${data.city}</p>
+      <p class="card__text"> State: ${data.state}</p>
+      <p class="card__text"> Latitude: ${data.lat}</p>
+      <p class="card__text"> Longitude: ${data.lng}</p>
       </div>
       `;
 
