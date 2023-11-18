@@ -78,8 +78,10 @@ const APP = {
     APP.dataContainer.appendChild(userList);
   },
 
-  errorHandler: (err) => {
-    APP.dataContainer.innerHTML = `<dialog>${err}</dialog>`;
+  errorHandler: (error) => {
+    let popover = document.getElementById("popover");
+    popover.style.display = "flex";
+    popover.textContent = `${error}`;
   },
 };
 
