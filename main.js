@@ -8,7 +8,6 @@ const APP = {
   },
 
   fetchData: function () {
-    console.log("working");
     const apiUrl = `${APP.url}?size=50`;
 
     fetch(apiUrl)
@@ -61,15 +60,15 @@ const APP = {
 
       div.innerHTML = `
       <h1 class="card__title"> ${data.full_name} </h1>
-      <div class="card__content">
-      <p class="card__text"> Uid: ${data.uid}</p>
-      <p class="card__text"> Email: ${data.email}</p>
-      <p class="card__text"> D.o.B: ${data.dob}</p>
-      <p class="card__text"> City: ${data.city}</p>
-      <p class="card__text"> State: ${data.state}</p>
-      <p class="card__text"> Latitude: ${data.lat}</p>
-      <p class="card__text"> Longitude: ${data.lng}</p>
-      </div>
+        <div class="card__content">
+          <p class="card__text"> Uid: ${data.uid}</p>
+          <p class="card__text"> Email: ${data.email}</p>
+          <p class="card__text"> D.o.B: ${data.dob}</p>
+          <p class="card__text"> City: ${data.city}</p>
+          <p class="card__text"> State: ${data.state}</p>
+          <p class="card__text"> Latitude: ${data.lat}</p>
+          <p class="card__text"> Longitude: ${data.lng}</p>
+        </div>
       `;
 
       userList.appendChild(div);
